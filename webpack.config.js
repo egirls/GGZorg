@@ -3,10 +3,10 @@ const path = require('path');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 
 module.exports = {
-  entry: './entry.js',
+  entry: './src/entry.js',
   output: {
     filename: 'bundle.js',
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve(__dirname, './public/dist'),
   },
   mode:'development',
   module: {
@@ -21,17 +21,30 @@ module.exports = {
         use: ['style-loader', 'vue-style-loader','css-loader'],
       },
       {
+         test: /\.(eot|svg|ttf|woff|woff2)(\?\S*)?$/,
+         loader: 'file-loader'
+      },
+      {
         test: /\.m?js$/,
-	exclude: [
+	      exclude: [
           // \\ for Windows, \/ for Mac OS and Linux
           /node_modules[\\\/]core-js/,
           /node_modules[\\\/]webpack[\\\/]buildin/,
         ],
-	loader:'babel-loader',
+	      loader:'babel-loader',
         options: {
           cacheDirectory: true,
-          presets: ["@babel/preset-env"]
-	}
+          presets: ["@babel/preset-env"],
+          "plugins": [
+          [
+          "component",
+          {
+          "libraryName": "element-ui",
+          "styleLibraryName": "theme-chalk"
+          }
+          ]
+          ]
+	      }
       }
     ]
   },
