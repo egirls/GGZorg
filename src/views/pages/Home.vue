@@ -65,11 +65,6 @@ export default {
     background-color: #d3dce6;
   }
 
-  .time {
-    font-size: 13px;
-    color: #999;
-  }
-  
   .bottom {
     margin-top: 13px;
     line-height: 12px;

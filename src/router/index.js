@@ -9,6 +9,16 @@ export default new Router({
 
   routes: [
   {
+    path: '/logIn',
+    name: 'LogIn',
+    component: () => import('../views/pages/LogIn.vue')
+  },
+  {
+    path: '/signIn',
+    name: 'SignIn',
+    component: () => import('../views/pages/SignIn.vue')
+  },
+  {
     path: '/error404',
     name: 'Error404',
     component: () => import('../views/errorPage/Error404.vue')
@@ -31,6 +41,13 @@ export default new Router({
       path: 'scientificResearch',
       name: 'ScientificResearch',
       component: () => import('../views/pages/ScientificResearch.vue'),
+      beforeEnter(to, from, next) {
+        next()
+      }
+    },{
+      path: 'docterG',
+      name: 'DocterG',
+      component: () => import('../views/pages/DocterG.vue'),
       beforeEnter(to, from, next) {
         next()
       }

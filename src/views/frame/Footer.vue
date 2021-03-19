@@ -35,16 +35,19 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-  .foot-container {
+  #foot-container {
   	width: 100%;
   	margin: 0 auto;
+    position: absolute;
+    bottom: 0;
   }
   .el-row {
   	text-align: center;
   	background: #F2F6FC;
   	min-height: 50px;
   	max-height: 100px;
-    margin-bottom: 20px;
+    padding: 20px 20%;
+    margin-bottom: 0;
     &:last-child {
       margin-bottom: 0;
     }

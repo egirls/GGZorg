@@ -5,7 +5,7 @@
   <el-menu-item index="scientificResearch">科学研究</el-menu-item>
   <el-submenu index="3">
     <template slot="title">研究团队</template>
-    <el-menu-item index="3-1">高国忠博士</el-menu-item>
+    <el-menu-item index="docterG">高国忠博士</el-menu-item>
     <el-menu-item index="3-2">团队成员</el-menu-item>
   </el-submenu>
   <el-submenu index="4">
@@ -17,6 +17,7 @@
   </el-submenu>
   <el-menu-item index="5" disabled>新闻</el-menu-item>
   <el-menu-item index="6" disabled>博客</el-menu-item>
+  <el-menu-item index="logIn">登录</el-menu-item>
 </el-menu>
   </div>
 </template>
