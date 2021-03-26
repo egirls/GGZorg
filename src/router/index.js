@@ -51,6 +51,20 @@ export default new Router({
       beforeEnter(to, from, next) {
         next()
       }
+    },{
+      path: 'member',
+      name: 'Member',
+      component: () => import('../views/pages/Member.vue'),
+      beforeEnter(to, from, next) {
+        next()
+      }
+    },{
+      path: 'papers',
+      name: 'Papers',
+      component: () => import('../views/pages/Papers.vue'),
+      beforeEnter(to, from, next) {
+        next()
+      }
     }
     ]
   }

@@ -16,7 +16,7 @@
     </el-form>
     <div>
       <span>还没有账号？</span>
-      <span @click="onSignIn">点击注册</span>
+      <span class="signWords" @click="onSignIn">点击注册</span>
     </div>
   </div>
 </template>
@@ -90,5 +90,9 @@ export default {
 <style scoped>
 .el-form {
   margin-top: 5%;
+}
+
+.signWords{
+  cursor: pointer;
 }
 </style>

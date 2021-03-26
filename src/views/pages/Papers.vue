@@ -1,25 +1,5 @@
 <template>
   <div>
-    <!-- banner-->
-    <el-carousel :interval="4000" type="card" height="400px">
-    <el-carousel-item v-for="item in banners" :key="item">
-      <el-image :src="item"></el-image>
-    </el-carousel-item>
-    </el-carousel>
-    <!-- info card-->
-    <el-row>
-    <el-col :span="6" v-for="(card, index) in infoCards" :key="index" :offset="index > 0 ? 3 : 0">
-    <el-card :body-style="{ padding: '0px' }">
-      <img :src="card.img" class="image">
-      <div>
-        <span>{{card.info}}</span>
-        <div class="bottom clearfix">
-        </div>
-      </div>
-    </el-card>
-    </el-col>
-    </el-row>
-    <!-- news -->
     <div class="newsBoard">
       <div>
         <el-card class="box-card">
@@ -27,35 +7,39 @@
             <span>小组新闻</span>
             <el-button style="float: right; padding: 3px 0" type="text">发表</el-button>
           </div>
-          <div v-for="(card, index) in news" :key="index"  class="text item">
+          <div v-for="(card, index) in news" :key="index"  @click="getDetailPaper" class="text item">
             {{'列表内容 ' + card.info }}
           </div>
         </el-card>
-      </div>     
+      </div>
+      <div class="block">
+         <el-pagination
+          @size-change="handleSizeChange"
+          @current-change="handleCurrentChange"
+          :current-page="currentPage4"
+          :page-sizes="[100, 200, 300, 400]"
+          :page-size="100"
+          layout="total, sizes, prev, pager, next, jumper"
+          :total="400">
+          </el-pagination>
+       </div>      
+    </div>
+    <div id="paperD" ref="paperD">
+      {{paperMes}}
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'Home',
+  name: 'Papers',
   //数据
   data(){
       return {
-        banners:[
-           '/images/banner1.jpeg',
-           '/images/banner2.jpg',
-           '/images/banner3.jpeg',
-           '/images/banner4.jpeg',
-           '/images/banner5.jpeg',
-           '/images/banner6.jpeg',
-        ],
-        infoCards:[
+        news:[
         {img:'/images/banner6.jpeg',info:'测井和钻井技术'},
         {img:'/images/banner4.jpeg',info:'地球物理研发'},
         {img:'/images/banner5.jpeg',info:'数据科学和人工智能'},
-        ],
-        news:[
         {img:'/images/banner6.jpeg',info:'测井和钻井技术'},
         {img:'/images/banner4.jpeg',info:'地球物理研发'},
         {img:'/images/banner5.jpeg',info:'数据科学和人工智能'},
@@ -66,7 +50,8 @@ export default {
         currentPage1: 5,
         currentPage2: 5,
         currentPage3: 5,
-        currentPage4: 4
+        currentPage4: 4,
+        paperMes:null,
       };
   },
   methods: {
@@ -75,6 +60,22 @@ export default {
       },
       handleCurrentChange(val) {
         console.log(`当前页: ${val}`);
+      },
+      getDetailPaper(){
+         // 执行get请求
+        this.axios.get('/getPaperContent')
+        .then((response)=>{
+          const data = response.data;
+
+          this.paperMes = data
+          this.$refs.paperD.innerHTML = data;
+          
+
+        })
+        .catch((response)=>{
+          console.log(response);
+        })
+
       }
     },
 }
@@ -82,49 +83,6 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-  .el-carousel {
-    width: 100%;
-  }
-
-  .el-carousel__item .el-image {
-    margin: 0 auto;
-    width: 100%;
-  }
-  
-  .el-carousel__item:nth-child(2n) {
-    background-color: #99a9bf;
-  }
-  
-  .el-carousel__item:nth-child(2n+1) {
-    background-color: #d3dce6;
-  }
-
-  .bottom {
-    margin-top: 13px;
-    line-height: 12px;
-  }
-
-  .button {
-    padding: 0;
-    float: right;
-  }
-
-  .image {
-    width: 100%;
-    height: 260px;
-    display: block;
-  }
-
-  .clearfix:before,
-  .clearfix:after {
-      display: table;
-      content: "";
-  }
-  
-  .clearfix:after {
-      clear: both
-  }
-
   .newsBoard {
     width: 100%;
     margin-top:30px;

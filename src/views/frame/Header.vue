@@ -6,12 +6,12 @@
   <el-submenu index="3">
     <template slot="title">研究团队</template>
     <el-menu-item index="docterG">高国忠博士</el-menu-item>
-    <el-menu-item index="3-2">团队成员</el-menu-item>
+    <el-menu-item index="member">团队成员</el-menu-item>
   </el-submenu>
   <el-submenu index="4">
     <template slot="title">公开发表</template>
     <el-menu-item index="4-1">书籍</el-menu-item>
-    <el-menu-item index="4-2">学术论文</el-menu-item>
+    <el-menu-item index="papers">学术论文</el-menu-item>
     <el-menu-item index="4-3">学术会议报告</el-menu-item>
     <el-menu-item index="4-4">专利</el-menu-item>
   </el-submenu>

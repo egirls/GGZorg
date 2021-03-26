@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="signInBox">
     <el-form ref="form" :model="form" label-width="5%" :span="8" :xs="10" :sm="10" :md="6" :lg="6" :xl="6" :offset="2">
       <el-col>
         <el-form-item label="学号/ID">
@@ -83,6 +83,10 @@ export default {
 }
 </script>
 <style scoped>
+#signInBox{
+  overflow: hidden;
+}
+
 .el-form {
   margin-top: 5%;
 }

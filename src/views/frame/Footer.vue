@@ -38,7 +38,7 @@ export default {
   #foot-container {
   	width: 100%;
   	margin: 0 auto;
-    position: absolute;
+    position: relative;
     bottom: 0;
   }
   .el-row {

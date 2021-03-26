@@ -16,8 +16,11 @@
   "dependencies": {
     "axios": "^0.21.1",
     "body-parser": "^1.19.0",
+    "connect-history-api-fallback": "^1.6.0",
     "element-ui": "^2.15.1",
     "express": "^4.17.1",
+    "fs": "0.0.1-security",
+    "markdown-js": "0.0.4",
     "mongodb": "^3.6.5",
     "vue": "^2.6.12",
     "vue-axios": "^3.2.4",
