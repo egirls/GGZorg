@@ -1,8 +1,9 @@
 const cn = require('./connect');
 
 function paperContent(req, callback) {
-  let isMatch;
-  let userMes;
+
+  let papers;
+  let isExist;
 
   cn.MongoClient.connect(cn.url, (err, client)=> {
     if (err) {
@@ -12,14 +13,24 @@ function paperContent(req, callback) {
 
       const db = client.db("GGZorg");
 
-      const collection = db.collection('users');
+      const collection = db.collection('news');
 
-      collection.find({'userId': '202071341'}).toArray((err, result)=> {
+      collection.find({'paperId': req.body.paperId}).toArray((err, result)=> {
+        isExist = false
 
-          isMatch = true;
-          userMes = {userName: result[0].userName, userId: result[0].userId};
+        if (result.length > 0) {
+          isExist = true
+          papers = {
+            paperId: result[0].paperId, 
+            paperAuthor: result[0].paperAuthor, 
+            paperTitle: result[0].paperTitle, 
+            paperIntro: result[0].paperIntro, 
+            paperPath: result[0].paperPath
+          };
 
-        callback({isMatch, userMes});
+        }
+
+        callback({isExist,papers});
       });
 
     }

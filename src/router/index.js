@@ -65,6 +65,27 @@ export default new Router({
       beforeEnter(to, from, next) {
         next()
       }
+    },{
+      path: 'detailPaper',
+      name: 'DetailPaper',
+      component: () => import('../views/pages/DetailPaper.vue'),
+      beforeEnter(to, from, next) {
+        next()
+      }
+    },{
+      path: 'news',
+      name: 'News',
+      component: () => import('../views/pages/News.vue'),
+      beforeEnter(to, from, next) {
+        next()
+      }
+    },{
+      path: 'aNews',
+      name: 'APieceOfNews',
+      component: () => import('../views/pages/APieceOfNews.vue'),
+      beforeEnter(to, from, next) {
+        next()
+      }
     }
     ]
   }

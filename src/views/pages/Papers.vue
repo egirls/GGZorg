@@ -4,11 +4,11 @@
       <div>
         <el-card class="box-card">
           <div slot="header" class="clearfix">
-            <span>小组新闻</span>
+            <span>小组论文</span>
             <el-button style="float: right; padding: 3px 0" type="text">发表</el-button>
           </div>
-          <div v-for="(card, index) in news" :key="index"  @click="getDetailPaper" class="text item">
-            {{'列表内容 ' + card.info }}
+          <div v-for="(paper, index) in papers" :key="index"  @click="getDetailPaper(paper)" class="text item">
+            {{'论文简介 ' + paper.paperIntro }}
           </div>
         </el-card>
       </div>
@@ -24,35 +24,32 @@
           </el-pagination>
        </div>      
     </div>
-    <div id="paperD" ref="paperD">
-      {{paperMes}}
-    </div>
   </div>
 </template>
 
 <script>
+import { mapGetters,mapMutations } from 'vuex'
+
 export default {
   name: 'Papers',
   //数据
   data(){
       return {
-        news:[
-        {img:'/images/banner6.jpeg',info:'测井和钻井技术'},
-        {img:'/images/banner4.jpeg',info:'地球物理研发'},
-        {img:'/images/banner5.jpeg',info:'数据科学和人工智能'},
-        {img:'/images/banner6.jpeg',info:'测井和钻井技术'},
-        {img:'/images/banner4.jpeg',info:'地球物理研发'},
-        {img:'/images/banner5.jpeg',info:'数据科学和人工智能'},
-        {img:'/images/banner6.jpeg',info:'测井和钻井技术'},
-        {img:'/images/banner4.jpeg',info:'地球物理研发'},
-        {img:'/images/banner5.jpeg',info:'数据科学和人工智能'},
-        ],
         currentPage1: 5,
         currentPage2: 5,
         currentPage3: 5,
         currentPage4: 4,
         paperMes:null,
       };
+  },
+  props: {},
+  computed: {
+    ...mapGetters([
+      'papers'
+    ]),
+    ...mapMutations([
+      'changePaperD', // 将 `this.increment()` 映射为 `this.$store.commit('increment')`
+    ]),
   },
   methods: {
       handleSizeChange(val) {
@@ -61,15 +58,17 @@ export default {
       handleCurrentChange(val) {
         console.log(`当前页: ${val}`);
       },
-      getDetailPaper(){
+      getDetailPaper(paper){
+        const paperId = paper.paperId
+        
          // 执行get请求
-        this.axios.get('/getPaperContent')
+        this.axios.get('/getPaperContent',{paperId:paperId})
         .then((response)=>{
           const data = response.data;
 
           this.paperMes = data
-          this.$refs.paperD.innerHTML = data;
-          
+          this.$store.commit('changePaperD',data)
+          this.$router.push('detailPaper')
 
         })
         .catch((response)=>{
@@ -107,5 +106,10 @@ export default {
 
   .box-card {
     width: 100%;
+  }
+  .paperD{
+    width: 100%;
+    display: float;
+    z-index:3;
   }
 </style>

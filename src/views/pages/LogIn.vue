@@ -21,6 +21,8 @@
   </div>
 </template>
 <script>
+import { mapGetters,mapMutations } from 'vuex'
+
 export default {
   name: 'LogIn',
   data () {
@@ -29,12 +31,16 @@ export default {
         sno: '',
         password: ''
       },
-      userMes: null
     }
   },
   props: {},
   computed: {
-
+    ...mapGetters([
+      'userMes'
+    ]),
+    ...mapMutations([
+      'changeUserMes', // 将 `this.changeUserMes()` 映射为 `this.$store.commit('changeUserMes')`
+    ]),
   },
   methods: {
     // 取消
@@ -60,12 +66,11 @@ export default {
         })
         .then((response)=>{
           const data = response.data;
-          console.log('logInData:',data);
 
           if (data.isMatch) {
 
-          this.userMes = data.userMes
-          console.log(data.userMes)
+          this.$store.commit('changeUserMes',data.userMes)
+
             // 跳转至首页
             this.$router.push('/')
           }else{

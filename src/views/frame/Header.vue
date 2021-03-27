@@ -15,7 +15,7 @@
     <el-menu-item index="4-3">学术会议报告</el-menu-item>
     <el-menu-item index="4-4">专利</el-menu-item>
   </el-submenu>
-  <el-menu-item index="5" disabled>新闻</el-menu-item>
+  <el-menu-item index="news">新闻</el-menu-item>
   <el-menu-item index="6" disabled>博客</el-menu-item>
   <el-menu-item index="logIn">登录</el-menu-item>
 </el-menu>

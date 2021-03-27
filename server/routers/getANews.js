@@ -4,15 +4,15 @@ const fs = require('fs');
 const path = require('path');
 const router = express.Router();
 
-const paperContent = require('../dbs/paperContent');
+const getANews = require('../dbs/getANews');
 
-router.get('/getPaperContent', (req, res)=> {
+router.get('/getANews', (req, res)=> {
 
-  paperContent(req, (result)=> {
-    if (result.isExist) {
-      const paperPath = path.resolve('./server/docs/papers/文件.md')
+  getANews(req, (result)=> {
+    if ('result.isExist') {
+      const aNewsPath = path.resolve('./server/docs/papers/文件.md')
       // 读取文件内容
-      fs.readFile(paperPath, 'utf8', (err, data) => {
+      fs.readFile(aNewsPath, 'utf8', (err, data) => {
       if (err) throw err;
       // 将文档内容转化为HTML格式
       const html = markdown.makeHtml(data);

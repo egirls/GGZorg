@@ -19,24 +19,26 @@
     </el-card>
     </el-col>
     </el-row>
-    <!-- news -->
+    <!-- news开始 -->
     <div class="newsBoard">
       <div>
         <el-card class="box-card">
           <div slot="header" class="clearfix">
             <span>小组新闻</span>
-            <el-button style="float: right; padding: 3px 0" type="text">发表</el-button>
           </div>
-          <div v-for="(card, index) in news" :key="index"  class="text item">
+          <div v-for="(card, index) in news" :key="index" @click="onANew(card)" class="text item">
             {{'列表内容 ' + card.info }}
           </div>
         </el-card>
       </div>     
     </div>
+    <!-- news结束-->
   </div>
 </template>
 
 <script>
+import { mapGetters,mapMutations } from 'vuex'
+
 export default {
   name: 'Home',
   //数据
@@ -55,19 +57,19 @@ export default {
         {img:'/images/banner4.jpeg',info:'地球物理研发'},
         {img:'/images/banner5.jpeg',info:'数据科学和人工智能'},
         ],
-        news:[
-        {img:'/images/banner6.jpeg',info:'测井和钻井技术'},
-        {img:'/images/banner4.jpeg',info:'地球物理研发'},
-        {img:'/images/banner5.jpeg',info:'数据科学和人工智能'},
-        {img:'/images/banner6.jpeg',info:'测井和钻井技术'},
-        {img:'/images/banner4.jpeg',info:'地球物理研发'},
-        {img:'/images/banner5.jpeg',info:'数据科学和人工智能'},
-        ],
         currentPage1: 5,
         currentPage2: 5,
         currentPage3: 5,
         currentPage4: 4
       };
+  },
+  props: {},
+  computed: {
+    ...mapGetters([
+      'news'
+    ]),
+    ...mapMutations([
+    ]),
   },
   methods: {
       handleSizeChange(val) {
@@ -75,8 +77,24 @@ export default {
       },
       handleCurrentChange(val) {
         console.log(`当前页: ${val}`);
+      },
+      onANew (aNews) {
+        const newsId = aNews.newsId
+          
+        // 执行get请求
+        this.axios.get('/getANews',{newsId:newsId})
+        .then((response)=>{
+          const data = response.data;
+
+          this.$store.commit('changeANews',data)
+          this.$router.push('aNews')
+
+        })
+        .catch((response)=>{
+          console.log(response);
+        })
       }
-    },
+  },
 }
 </script>
 
@@ -136,15 +154,6 @@ export default {
 
   .item {
     margin-bottom: 18px;
-  }
-
-  .clearfix:before,
-  .clearfix:after {
-    display: table;
-    content: "";
-  }
-  .clearfix:after {
-    clear: both
   }
 
   .box-card {

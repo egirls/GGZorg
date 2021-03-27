@@ -6,7 +6,9 @@ const app = express();
 // 路由方法引入
 const submitLogin = require('./server/routers/logIn');
 const submitSignIn = require('./server/routers/signIn');
+const getANews = require('./server/routers/getANews');
 const getPaperContent = require('./server/routers/paperContent');
+const submitPaperUpload = require('./server/routers/uploadPaper');
 
 const bodyParser = require('body-parser');
 
@@ -20,7 +22,9 @@ app.use(bodyParser.urlencoded({limit: '100mb', extended: true}));
 // 路由使用
 app.use('/', submitLogin);
 app.use('/', submitSignIn);
+app.use('/', getANews);
 app.use('/', getPaperContent);
+app.use('/', submitPaperUpload);
 
 // 端口监听
 app.listen(3000,function(){
