@@ -96,7 +96,7 @@ export default {
             let fileCode = e.target.result;
             // 执行post请求
             _this.axios.post('/submitPaperUpload',{
-              paperTitle:'这是一个标题2',
+              paperTitle:filename,
               paperAuthor:'作者2',
               paperIntro:'这是简介这是简介这是简介这是简介2',
               paperPath:fileCode,
