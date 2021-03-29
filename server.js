@@ -7,6 +7,7 @@ const app = express();
 const submitLogin = require('./server/routers/logIn');
 const submitSignIn = require('./server/routers/signIn');
 const getANews = require('./server/routers/getANews');
+const getAllPapers = require('./server/routers/getAllPapers');
 const getPaperContent = require('./server/routers/paperContent');
 const submitPaperUpload = require('./server/routers/uploadPaper');
 
@@ -23,6 +24,7 @@ app.use(bodyParser.urlencoded({limit: '100mb', extended: true}));
 app.use('/', submitLogin);
 app.use('/', submitSignIn);
 app.use('/', getANews);
+app.use('/', getAllPapers);
 app.use('/', getPaperContent);
 app.use('/', submitPaperUpload);
 

@@ -5,14 +5,14 @@
         <el-card class="box-card">
           <div slot="header" class="clearfix">
             <span>小组论文</span>
-            <el-button style="float: right; padding: 3px 0" type="text">发表</el-button>
+            <input style="float: right; padding: 3px 0" size="small" type="file" @change="uploadPaper($event)">点击上传</input>
           </div>
           <div v-for="(paper, index) in papers" :key="index"  @click="getDetailPaper(paper)" class="text item">
-            {{'论文简介 ' + paper.paperIntro }}
+            {{'论文标题 ' + paper.paperTitle }}
           </div>
         </el-card>
       </div>
-      <div class="block">
+      <div v-if="false" class="block">
          <el-pagination
           @size-change="handleSizeChange"
           @current-change="handleCurrentChange"
@@ -40,6 +40,7 @@ export default {
         currentPage3: 5,
         currentPage4: 4,
         paperMes:null,
+        fileList:[]
       };
   },
   props: {},
@@ -49,7 +50,25 @@ export default {
     ]),
     ...mapMutations([
       'changePaperD', // 将 `this.increment()` 映射为 `this.$store.commit('increment')`
+      'changePapers', // 将 `this.increment()` 映射为 `this.$store.commit('increment')`
     ]),
+  },
+  mounted(){
+    let _this = this
+
+    this.axios.get('getAllPapers')
+    .then((response)=>{
+      const isSuccess = response.data.isSuccess;
+      const papers = response.data.papers;
+
+
+      if (isSuccess) {
+        _this.$store.commit('changePapers',papers)              
+      }
+    })
+    .catch((response)=>{
+      console.log(response);
+    })
   },
   methods: {
       handleSizeChange(val) {
@@ -58,18 +77,57 @@ export default {
       handleCurrentChange(val) {
         console.log(`当前页: ${val}`);
       },
+      uploadPaper(e){
+        let _this = this
+        // 利用fileReader对象获取file
+        let file = e.target.files[0];
+        let filesize = file.size;
+        let filename = file.name;
+        // 2,621,440   2M
+        if (filesize > 2101440) {
+            // 文件大小大于2MB
+        }
+        let reader = new FileReader();
+        reader.readAsDataURL(file);
+
+        reader.onload = function (e) {
+     
+            // 读取到的文件base64url 数据编码 将此编码字符串传给后台即可
+            let fileCode = e.target.result;
+            // 执行post请求
+            _this.axios.post('/submitPaperUpload',{
+              paperTitle:'这是一个标题2',
+              paperAuthor:'作者2',
+              paperIntro:'这是简介这是简介这是简介这是简介2',
+              paperPath:fileCode,
+            })
+            .then((response)=>{
+              const isSuccess = response.data;
+              console.log(isSuccess)
+
+              if (isSuccess) {
+                _this.$store.commit('changePaperD',fileCode)
+                _this.$router.push('detailPaper')                
+              }
+            })
+            .catch((response)=>{
+              console.log(response);
+            })
+        }
+      },
       getDetailPaper(paper){
         const paperId = paper.paperId
-        
-         // 执行get请求
-        this.axios.get('/getPaperContent',{paperId:paperId})
+
+         // 执行请求
+        this.axios.post('/getPaperContent',{'paperId':paperId})
         .then((response)=>{
-          const data = response.data;
+          if (response.data.isExist) {
+            const paperMes = response.data.paperMes;
 
-          this.paperMes = data
-          this.$store.commit('changePaperD',data)
+            const paperD = paperMes.paperPath
+            this.$store.commit('changePaperD',paperD)
+          }
           this.$router.push('detailPaper')
-
         })
         .catch((response)=>{
           console.log(response);

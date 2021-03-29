@@ -2,7 +2,7 @@ const cn = require('./connect');
 
 function paperContent(req, callback) {
 
-  let papers;
+  let paperMes;
   let isExist;
 
   cn.MongoClient.connect(cn.url, (err, client)=> {
@@ -13,14 +13,16 @@ function paperContent(req, callback) {
 
       const db = client.db("GGZorg");
 
-      const collection = db.collection('news');
+      const collection = db.collection('papers');
 
       collection.find({'paperId': req.body.paperId}).toArray((err, result)=> {
         isExist = false
+        console.log('paperId',req.body.paperId)
+        console.log('result',result)
 
         if (result.length > 0) {
           isExist = true
-          papers = {
+          paperMes = {
             paperId: result[0].paperId, 
             paperAuthor: result[0].paperAuthor, 
             paperTitle: result[0].paperTitle, 
@@ -30,7 +32,7 @@ function paperContent(req, callback) {
 
         }
 
-        callback({isExist,papers});
+        callback({isExist,paperMes});
       });
 
     }

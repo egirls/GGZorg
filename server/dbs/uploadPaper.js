@@ -14,7 +14,9 @@ function uploadPaper(req, callback) {
 
       const collection = db.collection('papers');
 
-      collection.find({paperId: req.body.paperId}).count((err, result)=> {
+      const paperId = new Date().getTime();
+
+      collection.find({paperId: paperId}).count((err, result)=> {
 
         if (result > 0) {
           flag = false;
@@ -22,7 +24,7 @@ function uploadPaper(req, callback) {
         }
         else {
           collection.insertOne({
-            paperId: req.body.paperId,
+            paperId: paperId,
             paperAuthor: req.body.paperAuthor,
             paperTitle: req.body.paperTitle,
             paperIntro: req.body.paperIntro,

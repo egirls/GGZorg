@@ -9,6 +9,7 @@ module.exports = {
     path: path.resolve(__dirname, './public/dist'),
   },
   mode:'development',
+  devtool:'inline-source-map',
   module: {
     rules: [
       {
@@ -30,6 +31,7 @@ module.exports = {
           // \\ for Windows, \/ for Mac OS and Linux
           /node_modules[\\\/]core-js/,
           /node_modules[\\\/]webpack[\\\/]buildin/,
+          /node_modules/,
         ],
 	      loader:'babel-loader',
         options: {

@@ -15,15 +15,8 @@ export default new Vuex.Store({
     ],
     aNews: '',
     userMes: null,
-    papers:[
-      {paperId:'00000001',paperIntro:'测井和钻井技术'},
-      {paperId:'00000002',paperIntro:'地球物理研发'},
-      {paperId:'00000003',paperIntro:'数据科学和人工智能'},
-      {paperId:'00000004',paperIntro:'测井和钻井技术'},
-      {paperId:'00000005',paperIntro:'地球物理研发'},
-      {paperId:'00000006',paperIntro:'数据科学和人工智能'},
-    ],
-    paperD:''
+    papers:null,
+    paperD: null,
   },
   getters: {
     aNews: (state) => {
@@ -55,10 +48,14 @@ export default new Vuex.Store({
       // 变更状态
       state.userMes = userMes
     },
+    changePapers (state, papers) {
+      // 变更状态
+      state.papers = papers
+    },
     changePaperD (state, paperD) {
       // 变更状态
       state.paperD = paperD
-    }
+    },
   },
   actions: {
 
