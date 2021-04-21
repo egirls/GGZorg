@@ -24,7 +24,7 @@ function getANews(req, callback) {
             ANewsId: result[0].ANewsId, 
             ANewsAuthor: result[0].ANewsAuthor, 
             ANewsTitle: result[0].ANewsTitle, 
-            ANewsIntro: result[0].ANewsIntro, 
+            ANewsText: result[0].ANewsText, 
             ANewsPath: result[0].ANewsPath
           };
 

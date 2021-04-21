@@ -86,6 +86,13 @@ export default new Router({
       beforeEnter(to, from, next) {
         next()
       }
+    },{
+      path: 'editNews',
+      name: 'EditNews',
+      component: () => import('../views/pages/EditNews.vue'),
+      beforeEnter(to, from, next) {
+        next()
+      }
     }
     ]
   }

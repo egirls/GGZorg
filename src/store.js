@@ -17,6 +17,7 @@ export default new Vuex.Store({
     userMes: null,
     papers:null,
     paperD: null,
+    MDText:'',
   },
   getters: {
     aNews: (state) => {
@@ -33,6 +34,12 @@ export default new Vuex.Store({
     },
     paperD: (state) => {
       return state.paperD
+    },
+    MDTitle: (state) => {
+      return state.MDTitle
+    },
+    MDText: (state) => {
+      return state.MDText
     },
   },
   mutations: {
@@ -55,6 +62,14 @@ export default new Vuex.Store({
     changePaperD (state, paperD) {
       // 变更状态
       state.paperD = paperD
+    },
+    changeMDTitle (state, MDTitle) {
+      // 变更状态
+      state.MDTitle = MDTitle
+    },
+    changeMDText (state, MDText) {
+      // 变更状态
+      state.MDText = MDText
     },
   },
   actions: {
