@@ -12,7 +12,7 @@ npm install
 ```
 启动前端服务
 ```
-npm run webpack
+npm run dev
 ```
 请打开新的终端页面，启动服务端
 ```
