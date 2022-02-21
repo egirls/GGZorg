@@ -18,6 +18,6 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 #content{
-	min-height: 80%;
+	min-height: 78%;
 }
 </style>

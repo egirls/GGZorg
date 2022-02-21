@@ -1,26 +1,14 @@
 <template>
   <div id="foot-container">
-  	<el-row :gutter="20">
-      <el-col :span="6">
-      	<div class="grid-content bg-purple">
-      	Addres<br />
-      	Yangtze University<br />
-        Caidian Street Daxue Rd No. 111<br />
+  	<el-row>
+      <el-col :span="10" :offset="2">
+      	<div class="grid-content">
+      	  长江大学油气高性能计算与智能探测研发中心
         </div>
       </el-col>
-      <el-col :span="6">
-      	<div class="grid-content bg-purple">
-      		Latest Events
-      	</div>
-      </el-col>
-      <el-col :span="6">
-      	<div class="grid-content bg-purple">
-      		Quick Links
-      	</div>
-      </el-col>
-      <el-col :span="6">
-      	<div class="grid-content bg-purple">
-      		Publications Statistics
+      <el-col :span="6"  :offset="6" class="bg-left">
+      	<div class="grid-content">
+      		鄂ICP备2021022197号
       	</div>
       </el-col>
     </el-row>
@@ -37,35 +25,32 @@ export default {
 <style scoped>
   #foot-container {
   	width: 100%;
+    min-height: 10%;
   	margin: 0 auto;
     position: relative;
     bottom: 0;
+    display: block;
+    background: #35373b;
   }
   .el-row {
-  	text-align: center;
-  	background: #F2F6FC;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    text-align: center;
   	min-height: 50px;
-  	max-height: 100px;
-    padding: 20px 20%;
-    margin-bottom: 0;
-    &:last-child {
-      margin-bottom: 0;
-    }
+    color: #fff;
   }
   .el-col {
-    border-radius: 4px;
-  }
-  .bg-purple-dark {
-
-  }
-  .bg-purple {
-
-  }
-  .bg-purple-light {
-
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
   .grid-content {
-    border-radius: 4px;
-    min-height: 36px;
+    vertical-align: middle;
+    text-align: center;
+  }
+  .bg-left{
+    background-color: #94969c;
   }
 </style>
